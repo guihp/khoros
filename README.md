@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# KHOROS Blog — Onda 0
 
-## Getting Started
+Blog de saúde mental e psicologia em português do Brasil. Primeira fase de validação da plataforma KHOROS.
 
-First, run the development server:
+## Stack
+
+- **Next.js 16** (App Router, SSG)
+- **Tailwind CSS 4**
+- **MDX** (artigos em `content/articles/`)
+- **Supabase** (leads + eventos)
+- **Plausible / GA4** (analytics)
+
+## Desenvolvimento local
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Acesse [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy na Vercel
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. Conecte o repositório na [Vercel](https://vercel.com)
+2. Configure as variáveis de ambiente (veja `.env.example`)
+3. Deploy automático a cada push
 
-## Learn More
+A região padrão está configurada para `gru1` (São Paulo) em `vercel.json`.
 
-To learn more about Next.js, take a look at the following resources:
+### Variáveis obrigatórias em produção
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Variável | Descrição |
+|----------|-----------|
+| `NEXT_PUBLIC_SITE_URL` | URL pública do site |
+| `NEXT_PUBLIC_SUPABASE_URL` | URL do projeto Supabase |
+| `SUPABASE_SERVICE_ROLE_KEY` | Chave service role (API de leads) |
+| `NEXT_PUBLIC_PLAUSIBLE_DOMAIN` | Domínio para Plausible (opcional) |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Supabase
 
-## Deploy on Vercel
+Execute o SQL em `supabase/migrations/001_initial.sql` no editor SQL do Supabase para criar as tabelas `leads` e `analytics_events`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Estrutura
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+content/articles/     # Artigos MDX com frontmatter
+src/app/              # Páginas (App Router)
+src/components/       # Componentes reutilizáveis
+src/lib/              # Utilitários, conteúdo, schema
+```
+
+## Métricas da Onda 0
+
+Eventos rastreados:
+- `validation_clarified` — leitor esclareceu dúvida
+- `validation_needs_help` — ainda precisa de orientação
+- `lead_form_submit` / `lead_form_success` — captura de lead
+
+## Imagens
+
+Fotos de categorias e seções via [Unsplash](https://unsplash.com), armazenadas localmente em `public/images/` para performance e estabilidade.
+
+## Regra de ouro
+
+> Toda funcionalidade nasce de uma hipótese, toda hipótese deve ser validada por dados, e o conteúdo entrega valor real antes de qualquer oferta. Acolher sempre vem antes de converter.

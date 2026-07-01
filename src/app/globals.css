@@ -1,26 +1,71 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafb;
+  --foreground: #1e293b;
+  --khoros-cyan: #00e5ff;
+  --khoros-cyan-dark: #00b4d8;
+  --khoros-teal: #48cae4;
+  --khoros-mint: #e8f8f5;
+  --khoros-sage: #d4edda;
+  --khoros-slate: #64748b;
+  --khoros-warm: #fef9f3;
+  --card: #ffffff;
+  --border: #e2e8f0;
+  --muted: #f1f5f9;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-khoros-cyan: var(--khoros-cyan);
+  --color-khoros-cyan-dark: var(--khoros-cyan-dark);
+  --color-khoros-teal: var(--khoros-teal);
+  --color-khoros-mint: var(--khoros-mint);
+  --color-khoros-sage: var(--khoros-sage);
+  --color-khoros-slate: var(--khoros-slate);
+  --color-khoros-warm: var(--khoros-warm);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-muted: var(--muted);
+  --font-sans: var(--font-dm-sans);
+  --font-serif: var(--font-source-serif);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+}
+
+.prose-khoros h2 {
+  @apply text-2xl font-semibold text-foreground mt-10 mb-4;
+}
+
+.prose-khoros h3 {
+  @apply text-xl font-medium text-foreground mt-8 mb-3;
+}
+
+.prose-khoros p {
+  @apply text-khoros-slate leading-relaxed mb-4;
+}
+
+.prose-khoros ul {
+  @apply list-disc pl-6 mb-4 space-y-2 text-khoros-slate;
+}
+
+.prose-khoros ol {
+  @apply list-decimal pl-6 mb-4 space-y-2 text-khoros-slate;
+}
+
+.prose-khoros strong {
+  @apply font-semibold text-foreground;
+}
+
+.prose-khoros a {
+  @apply text-khoros-cyan-dark underline underline-offset-2 hover:text-khoros-cyan;
+}
+
+.prose-khoros blockquote {
+  @apply border-l-4 border-khoros-cyan pl-4 italic text-khoros-slate my-6;
 }
